@@ -1,4 +1,4 @@
-# Android Project 5 - *Name of App Here*
+# Android Project 5 - *BitFit*
 
 Submitted by: **Ermain Paul**
 
@@ -31,7 +31,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='bitfit-walkthrough-part-i.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='bitfit-walkthrough-part-ii.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
