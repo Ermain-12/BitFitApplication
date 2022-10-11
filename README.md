@@ -4,7 +4,7 @@ Submitted by: **Ermain Paul**
 
 **BitFit** is a health metrics app that allows users to track ... [TODO] 
 
-Time spent: **8.5** hours spent in total
+Time spent: **11.5** hours spent in total
 
 ## Required Features
 
@@ -14,7 +14,7 @@ The following **required** functionality is completed:
   - Chosen metric(s): `[TODO: FILL ME IN TO GET CREDIT]`
 - [x] **There is a "create entry" UI that prompts users to make their daily entry**
 - [x] **New entries are saved in a database and then updated in the RecyclerView**
-- [] **On application restart, previously entered entries are preserved (i.e., are *persistent*)**
+- [x] **On application restart, previously entered entries are preserved (i.e., are *persistent*)**
  
 The following **optional** features are implemented:
 
