@@ -22,12 +22,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bitFitAdapter = BitFitAdapter(mutableListOf())
+        bitFitAdapter = BitFitAdapter(activities)
 
         // Fetch the RecyclerView
         val bitFitRecyclerView: RecyclerView = findViewById(R.id.rvBitFit)
         bitFitRecyclerView.adapter = bitFitAdapter
         bitFitRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        lifecycleScope.launch(IO) {
+            (application as BitFitApplication).db.bitFitDao().getAll().collect() {
+                it.map { food ->
+                    BitFitActivity(
+                        food.activity,
+                        food.calories
+                    )
+                }.also { mappedList ->
+                    activities.clear()
+                    activities.addAll(mappedList)
+                    bitFitAdapter.notifyDataSetChanged()
+                }
+            }
+        }
 
         val buttonAdd = findViewById<Button>(R.id.buttonSubmit)
         bitFitActivity = findViewById(R.id.editTextBitFitActivity)
@@ -43,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             bitFitCalories.text.clear()
 
             lifecycleScope.launch(IO) {
-                (application as BitFitApplication).db.bitFitDao().getAll().collect() {
+                (application as BitFitApplication).db.bitFitDao().getAll().collect(){
                     it.map { food ->
                         BitFitActivity(
                             food.activity,
@@ -55,12 +70,6 @@ class MainActivity : AppCompatActivity() {
                     BitFitActivity(activityName, activityCalories)
                 )
             }
-        }
-
-
-        lifecycleScope.launch {
-            val activityList = AppDatabase.getInstance(this@MainActivity).bitFitDao().getAll()
-            activityList.collect()
         }
     }
 }
