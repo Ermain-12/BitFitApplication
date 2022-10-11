@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BitFit-Application</string>
+    <string name="submit">Submit</string>
+    <string name="enter_the_calorie_amount">Enter the calorie amount</string>
+    <string name="enter_the_activity">Enter the activity..</string>
+    <string name="activity_name">Activity Name</string>
+    <string name="calories_burned">Calories burned</string>
+    <string name="record_this_food">Record This Food</string>
+</resources>
