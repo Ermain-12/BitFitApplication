@@ -64,12 +64,18 @@ class MainActivity : AppCompatActivity() {
                             food.activity,
                             food.calories
                         )
+                    }.also {
+                            mappedList ->
+                        activities.clear()
+                        activities.addAll(mappedList)
+                        bitFitAdapter.notifyDataSetChanged()
                     }
                 }
                 (application as BitFitApplication).db.bitFitDao().insert(
                     BitFitActivity(activityName, activityCalories)
                 )
             }
+            finish()
         }
     }
 }
