@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_exercises"
+        android:icon="@drawable/ic_baseline_sports_gymnastics_24"
+        android:title="@string/exercises" />
+
+    <item
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/ic_baseline_query_stats_24"
+        android:title="@string/statistics" />
+</menu>
