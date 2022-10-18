@@ -65,7 +65,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="@string/food_calories"
+        android:hint="@string/food_calories"
         app:layout_constraintBottom_toTopOf="@+id/buttonRecordFood"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.223"

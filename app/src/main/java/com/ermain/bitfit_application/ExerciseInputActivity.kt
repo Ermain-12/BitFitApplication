@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.ermain.bitfit_application.R
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ExerciseInputActivity : AppCompatActivity() {
@@ -26,6 +27,16 @@ class ExerciseInputActivity : AppCompatActivity() {
             val foodText = foodNameText.text.toString()
             val calorieText = foodCalories.text.toString()
             Log.i("ExerciseInputActivity", "Food: ${foodText}, Calorie: $calorieText")
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                (application as BitFitApplication).db.bitFitDao().insert(
+                    BitFitActivity(
+                        activity = foodText,
+                        calories = calorieText
+                    )
+                )
+            }
+            finish()
         }
     }
 }

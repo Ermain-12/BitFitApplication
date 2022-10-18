@@ -20,4 +20,7 @@
     <string name="record_new_food">Record New Food</string>
     <string name="food_name">Food Name</string>
     <string name="food_calories">Food Calories</string>
+    <string name="_875">875</string>
+    <string name="_2100">2100</string>
+    <string name="_1500">1500</string>
 </resources>
