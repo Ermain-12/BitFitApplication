@@ -61,9 +61,9 @@ Describe any challenges encountered while building the app.
     limitations under the License.
     
     
-    =====================================================================================================================================
+=====================================================================================================================================
     
-    # Android Project 6 - *BitFit Application*
+# Android Project 6 - *BitFit Application*
 
 Submitted by: **Ermain Paul**
 
