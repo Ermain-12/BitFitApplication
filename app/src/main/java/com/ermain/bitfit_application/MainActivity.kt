@@ -1,81 +1,35 @@
 package com.ermain.bitfit_application
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import androidx.fragment.app.Fragment
+import com.ermain.bitfit_application.databinding.ActivityMainBinding
+import com.ermain.bitfit_application.fragment.ExerciseListFragment
+import com.ermain.bitfit_application.fragment.StatisticsViewFragment
 
 class MainActivity : AppCompatActivity() {
-
-    private val activities = mutableListOf<BitFitActivity>()
-    private lateinit var bitFitAdapter: BitFitAdapter
-    private lateinit var bitFitActivity: EditText
-    private lateinit var bitFitCalories: EditText
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        replaceFragment(ExerciseListFragment())
 
-        bitFitAdapter = BitFitAdapter(activities)
-
-        // Fetch the RecyclerView
-        val bitFitRecyclerView: RecyclerView = findViewById(R.id.rvBitFit)
-        bitFitRecyclerView.adapter = bitFitAdapter
-        bitFitRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        lifecycleScope.launch(IO) {
-            (application as BitFitApplication).db.bitFitDao().getAll().collect() {
-                it.map { food ->
-                    BitFitActivity(
-                        food.activity,
-                        food.calories
-                    )
-                }.also { mappedList ->
-                    activities.clear()
-                    activities.addAll(mappedList)
-                    bitFitAdapter.notifyDataSetChanged()
-                }
+        binding.bnSwitch?.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.nav_exercises -> replaceFragment(ExerciseListFragment())
+                R.id.nav_stats -> replaceFragment(StatisticsViewFragment())
+                else -> false
             }
+            true
         }
+    }
 
-        val buttonAdd = findViewById<Button>(R.id.buttonSubmit)
-        bitFitActivity = findViewById(R.id.editTextBitFitActivity)
-        bitFitCalories = findViewById(R.id.editTextCalorieAmount)
-
-        buttonAdd.setOnClickListener {
-            val activityName = bitFitActivity.text.toString()
-            val activityCalories = bitFitCalories.text.toString()
-
-            val activity = BitFitActivity(activityName, activityCalories)
-            bitFitAdapter.addBitFitActivity(activity)
-            bitFitActivity.text.clear()
-            bitFitCalories.text.clear()
-
-            lifecycleScope.launch(IO) {
-                (application as BitFitApplication).db.bitFitDao().getAll().collect(){
-                    it.map { food ->
-                        BitFitActivity(
-                            food.activity,
-                            food.calories
-                        )
-                    }.also {
-                            mappedList ->
-                        activities.clear()
-                        activities.addAll(mappedList)
-                        bitFitAdapter.notifyDataSetChanged()
-                    }
-                }
-                (application as BitFitApplication).db.bitFitDao().insert(
-                    BitFitActivity(activityName, activityCalories)
-                )
-            }
-            finish()
-        }
+    private fun replaceFragment(exerciseListFragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.flStagingArea, exerciseListFragment)
+        fragmentTransaction.commit()
     }
 }

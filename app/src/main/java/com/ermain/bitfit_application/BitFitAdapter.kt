@@ -1,12 +1,14 @@
 package com.ermain.bitfit_application
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BitFitAdapter(private val activityList: MutableList<BitFitActivity>)
+class BitFitAdapter(private val context: Context,
+                    private val activityList: MutableList<BitFitActivity>)
     : RecyclerView.Adapter<BitFitAdapter.ViewHolder>() {
 
 
